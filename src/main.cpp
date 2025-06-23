@@ -4,12 +4,15 @@
 #include "utils.h"
 
 int main(int argc, char* argv[]) {
-    bool count_bytes = false;
     char* file_name = NULL;
+    bool count_bytes = false;
+    bool count_lines = false;
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-c") == 0) {
             count_bytes = true;
+        } else if (strcmp(argv[i], "-l") == 0) {
+            count_lines = true;
         } else {
             file_name = argv[i];
         }
@@ -33,6 +36,13 @@ int main(int argc, char* argv[]) {
         char byte;
         int count = 0;
         while(input_file.get(byte)) {
+            count++;
+        }
+        std::cout << file_name << " " << count << std::endl;
+    } else if (count_lines) {
+        std::string line;
+        int count = 0;
+        while(std::getline(input_file, line)) {
             count++;
         }
         std::cout << file_name << " " << count << std::endl;

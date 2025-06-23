@@ -7,12 +7,15 @@ int main(int argc, char* argv[]) {
     char* file_name = NULL;
     bool count_bytes = false;
     bool count_lines = false;
+    bool count_words = false;
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "-c") == 0) {
             count_bytes = true;
         } else if (strcmp(argv[i], "-l") == 0) {
             count_lines = true;
+        } else if (strcmp(argv[i], "-w") == 0) {
+            count_words = true;
         } else {
             file_name = argv[i];
         }
@@ -43,6 +46,13 @@ int main(int argc, char* argv[]) {
         std::string line;
         int count = 0;
         while(std::getline(input_file, line)) {
+            count++;
+        }
+        std::cout << file_name << " " << count << std::endl;
+    } else if (count_words) {
+        std::string word;
+        int count = 0;
+        while (input_file >> word) {
             count++;
         }
         std::cout << file_name << " " << count << std::endl;
